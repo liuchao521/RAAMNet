@@ -1,0 +1,11 @@
+{
+  "date1_path": "../data/scene_date1.mat",
+  "date1_key": "T1",
+  "date2_path": "../data/scene_date2.mat",
+  "date2_key": "T2",
+  "label_path": "../data/scene_label.mat",
+  "label_key": "GT",
+  "cube_layout": "HWC",
+  "positive_values": [1],
+  "standardize": true
+}

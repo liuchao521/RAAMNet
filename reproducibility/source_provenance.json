@@ -1,5 +1,5 @@
 {
-  "model_version": "Stage39_P_full",
+  "model_version": "RAAM-Net",
   "source_sha256": {
     "fusion_models.py": "eb1e8913651a75ed8a98031389618996a06f17a7f74e9ecc6abb5578b67a75bc",
     "conv_ffm.py": "34d578892c1ceafc25223ec426febe609a23a005068c5239ef77cfa121c31940",
@@ -7,9 +7,9 @@
     "feature_bddm.py": "f663be644995e6754dbbff088cb84c35da2f17795ab260ad359ccaf3d2fff744",
     "source_snapshot/model.py": "f68aa229b047ea8048c9ba2ab52aefe82a63fe3b86a67ee241a339afb10285f6"
   },
-  "base_snapshot_file": "raamnet/_stage39_base.py",
-  "initialization": "Historical base initialization, then feature-only BDDM and two independent ConvFFMs, restoring CPU RNG after ConvFFM construction.",
-  "fusion": "Original Stage39 learned role gate, channel/spatial selector, same-role mean interaction; no added interaction projection.",
+  "base_snapshot_file": "raamnet/_layers.py",
+  "initialization": "Initialize shared layers, reference-feature detail refinement and two independent fusion blocks while preserving the random-number state.",
+  "fusion": "Learned role gating, channel/spatial selection, and same-role feature interactions.",
   "training": {
     "epochs": 300,
     "optimizer": "Adam",

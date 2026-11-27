@@ -1,17 +1,16 @@
-"""Strict loading of original Stage39 and release checkpoint dictionaries."""
+"""Strict loading of RAAM-Net checkpoint dictionaries."""
 from __future__ import annotations
 
 from pathlib import Path
 import torch
 
-from .model import MODEL_VERSION, RAAMNet
+from .model import RAAMNet
 
 
-def load_stage39_checkpoint(path: str | Path, bands: int, device: str | torch.device):
+def load_checkpoint(path: str | Path, bands: int, device: str | torch.device):
     payload = torch.load(path, map_location="cpu", weights_only=True)
-    version = payload.get("model_version")
-    if version is not None and version != MODEL_VERSION:
-        raise ValueError(f"Expected {MODEL_VERSION}, received {version}")
+    # Architecture compatibility is established by tensor shapes and strict
+    # state-dict loading, including checkpoints with earlier metadata labels.
     state = payload.get("model_state_dict", payload.get("model", payload))
     dim, saved_bands = state["reference_reduction.0.weight"].shape[:2]
     if saved_bands != 2 * bands:

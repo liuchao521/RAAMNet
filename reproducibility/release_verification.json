@@ -1,6 +1,6 @@
 {
   "passed": true,
-  "model_version": "Stage39_P_full",
+  "model_version": "RAAM-Net",
   "torch": "2.4.1+cu118",
   "cuda": "11.8",
   "gpu": "NVIDIA GeForce RTX 3090",
@@ -33,8 +33,8 @@
         "gradients_close": true,
         "gradient_rtol": 1e-05,
         "gradient_atol": 1e-07,
-        "gradient_max_abs_difference": 7.566995918750763e-10,
-        "original_repeat_gradient_max_abs_difference": 4.656612873077393e-10
+        "gradient_max_abs_difference": 9.313225746154785e-10,
+        "original_repeat_gradient_max_abs_difference": 9.313225746154785e-10
       },
       {
         "shape": [
@@ -45,8 +45,8 @@
         "gradients_close": true,
         "gradient_rtol": 1e-05,
         "gradient_atol": 1e-07,
-        "gradient_max_abs_difference": 1.1641532182693481e-09,
-        "original_repeat_gradient_max_abs_difference": 8.149072527885437e-10
+        "gradient_max_abs_difference": 9.313225746154785e-10,
+        "original_repeat_gradient_max_abs_difference": 9.313225746154785e-10
       }
     ]
   },
@@ -115,36 +115,26 @@
   "full_model_forward_backward_passed": true,
   "train_and_evaluate_cli_passed": true,
   "existing_checkpoint_overwrite_rejected": true,
+  "previous_checkpoint_metadata_compatible": true,
   "cli_smoke_note": "One actual Farmland epoch checks the CLI only; it is not included in the published 300-epoch results.",
   "release_code_sha256": {
     "raamnet/__init__.py": "fd4090ad6e345826613d8e50feb015ffcb8bdbab0dac5a93852ca33ec4d044e1",
-    "raamnet/data.py": "5d2ad8e9cc6da47414615351f7c60f0533515f83c09da257622ff62e7218f243",
+    "raamnet/data.py": "c9f57b57126dd844b5c0d2b0e2096443a54a49fbe9d6db050d970f81d17f58f2",
     "raamnet/engine.py": "2eaae22a1c6f3cbbb7e48d707b8f2599449cf6c82347884ae201c57b1f247064",
     "raamnet/metrics.py": "97eb346c20ce5920224907c40047409c2295861adaa9e19a6771ff901f0d6775",
-    "raamnet/model.py": "565e31cd36c930780466fc62d7644a885d1c36989218f7bc5ce9291b461b5853",
-    "raamnet/_stage39_base.py": "f68aa229b047ea8048c9ba2ab52aefe82a63fe3b86a67ee241a339afb10285f6",
-    "raamnet/stage39.py": "d13c7857b32525e91f132d95ecb2b83c1628c9714cd77871416c170cd3fc168e",
-    "raamnet/checkpoints.py": "3123e9d486fa58253a1793878f56cbe413fa304e8e26f0966049702f3b732c35",
+    "raamnet/model.py": "aeb26c9486caac5ad8bd7546ac51709ddeb53ae9b0f2fbce178f82145fe82cfb",
+    "raamnet/network.py": "d55108b5d411560c732fcb96f94c7811497332540a59c489883d60641c2b9932",
+    "raamnet/checkpoints.py": "6f78885f8454ae5ab5fa9ae1144fa455330e4d07b92b091c9773a0cbbeb5e711",
+    "raamnet/_layers.py": "f68aa229b047ea8048c9ba2ab52aefe82a63fe3b86a67ee241a339afb10285f6",
     "configs/scene_example.json": "924d688670377f90d0ca3dfa4af1758664a722938f3f8e305c0053448f93dabe",
     "configs/Farmland.json": "690edd28655a931d9cecf05e91a56e07694e41cb8114d3e03b94aa2c66d81588",
     "configs/River.json": "dd7799a1c77f22105c8922f1cc92032b7fc8e9f1317276842ece9fea30833625",
     "configs/USA.json": "016837f112a6a1b641557f4f73bb53b8fa06363473bd8e936f986ab7a6ef3c2d",
     "tests/test_model.py": "361600334d9185de561421bee1c9fc55c975e2da8838350dff56998d3b1c794c",
     "tests/test_data.py": "d4223cdff5842cb07a6fe1c6eebeb3f3f147bbbd64f31773b50faaae16d2eb78",
-    "tests/verify_stage39_reference.py": "8ab4927ae69b9180cbdfeada7542e6e760ec37c56d451d2f9655d3490c7bfac4",
-    "train.py": "add49695a4ad3e72ea4b27c2f060da5d28b077027ce4795fddfb4449ff61f0c9",
-    "evaluate.py": "353f09dcb9aca4ab16a38c3bc1f31c79d7ea912cdf28d91433a2985ee782c0b9",
-    "profile_complexity.py": "14f1451e04fbe7d1ead81f7d6921a89088e1c2bcbe86e5c90dae14d68af19015"
-  },
-  "tested_transport_proof_sha256": "9796cbb7dc8fc9791a53c606a7594cef8424e897ef38cb235d419e8161bf7058",
-  "git_LF_normalization": {
-    "only_transport_line_endings_changed": true,
-    "tested_CRLF_sha256": {
-      "configs/Farmland.json": "0ab408c03860eb701bbd5bc40481b518d676747989a9e7219627019c64cb77ea",
-      "configs/River.json": "1f626fec038c97d72277d69edeeff20a95f40c9375501d60f280cdc8d54139ed",
-      "configs/USA.json": "f40fae2c250ff8bb60a09c1ca3648d3a40b2bae298fdc297fb6a259458885441",
-      "raamnet/model.py": "2cfa17f0c18505c34f4f64cfeaeb4d7e8a13dc99277b72cee7d854334532556f"
-    },
-    "note": "Text files are published with Git LF endings. Each local file matched its actually tested transport SHA before this CRLF-to-LF-only conversion; Python ASTs were unchanged."
+    "tests/verify_reference.py": "9e4d862aed4920a546899db5672dd44fcf3c6cc15c413e9b889c263382ab7926",
+    "train.py": "d08ac859f5dae1278ec5f4f4f16554b291f9faddb18700642759671a80c2d3d8",
+    "evaluate.py": "323ef41326a9ce3dedf3841f32f88694491f6b7ac9f3425543ae572bccfb83e3",
+    "profile_complexity.py": "e3266a15192f95a633ff784e95f4499bf2ea54c4d0e10916d04fb624e8707a2a"
   }
 }

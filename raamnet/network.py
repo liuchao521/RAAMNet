@@ -1,7 +1,6 @@
-"""The complete, checkpoint-compatible Stage39 P_full model.
+"""RAAM-Net for hyperspectral image change detection.
 
-Only the validated full architecture is exposed. The private base snapshot
-preserves historical initialization order and state-dict names.
+Shared layers preserve reproducible initialization and checkpoint keys.
 """
 from __future__ import annotations
 
@@ -9,9 +8,9 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from . import _stage39_base as original
+from . import _layers as original
 
-MODEL_VERSION = "Stage39_P_full"
+MODEL_VERSION = "RAAM-Net"
 
 
 class FeatureDirectionalDetail(original.BitemporalDirectionalDetailModule):
@@ -69,8 +68,8 @@ class ConvFeatureFusion(nn.Module):
         return content + self.refinement(content)
 
 
-class Stage39PRCF(original.ProgressiveCrossRoleFusion):
-    """Original learned gate/selector equations in Stage39 operation order."""
+class ProgressiveCrossRoleFusion(original.ProgressiveCrossRoleFusion):
+    """Role-guided residual correction with learned gating and selection."""
 
     def forward(self, bc, br, rc, rd, cc, cd, sr, sc):
         sr = self._score(sr, bc)
@@ -90,11 +89,11 @@ class Stage39PRCF(original.ProgressiveCrossRoleFusion):
 
 
 class RAAMNet(original.RAAMNet):
-    """Complete Stage39 P_full, retaining original PRCF gate and selectors.
+    """RAAM-Net with reference detail refinement and discrepancy context.
 
-    Original temporary layers are initialized before replacement to preserve
-    all historical shared tensors and the RNG state for matched training.
-    No alternative operator assignment or fusion variant is selected here.
+    Shared tensors are initialized in a fixed order for reproducibility.
+    The two fusion blocks preserve the random-number state during
+    construction so initialization remains checkpoint-compatible.
     """
 
     def __init__(self, bands: int, dim: int = 64, classes: int = 2, d_state: int = 16) -> None:
@@ -105,7 +104,7 @@ class RAAMNet(original.RAAMNet):
         self.fuse_change = ConvFeatureFusion(dim)
         self.fuse_reference = ConvFeatureFusion(dim)
         torch.set_rng_state(state)
-        self.prcf.__class__ = Stage39PRCF
+        self.prcf.__class__ = ProgressiveCrossRoleFusion
 
     def forward(self, date1: torch.Tensor, date2: torch.Tensor) -> torch.Tensor:
         if date1.shape != date2.shape or date1.ndim != 4:

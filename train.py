@@ -26,7 +26,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", required=True, type=int)
     parser.add_argument("--epochs", default=300, type=int)
     parser.add_argument("--learning-rate", default=1e-4, type=float)
-    parser.add_argument("--split", help="archived Stage39 .npz indices (recommended for reproduction)")
+    parser.add_argument("--split", help="saved .npz training/validation/test indices")
     parser.add_argument("--train-ratio", default=0.01, type=float)
     parser.add_argument("--val-ratio", default=0.01, type=float)
     parser.add_argument("--save-interval", default=50, type=int)

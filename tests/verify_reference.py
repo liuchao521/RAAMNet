@@ -1,9 +1,10 @@
-"""Compare the released full model with an immutable original Stage39 tree.
+"""Compare RAAM-Net with an independently supplied reference implementation.
 
-Run on an idle CUDA device with its validated mamba-ssm environment:
-python tests/verify_stage39_reference.py --reference-root /path/to/Stage39
+Run on an idle CUDA device with a compatible mamba-ssm environment:
+python tests/verify_reference.py --reference-root /path/to/reference
 """
 import argparse
+import importlib
 import json
 import sys
 from pathlib import Path
@@ -16,13 +17,13 @@ from raamnet import RAAMNet
 from raamnet.engine import seed_everything
 
 
-def run(reference_root):
+def run(reference_root, reference_module, reference_factory, reference_kwargs):
     sys.path.insert(0, str(Path(reference_root).resolve()))
-    from fusion_models import build_model
+    build_model = getattr(importlib.import_module(reference_module), reference_factory)
     cases = []
     for bands, parameters in ((155, 213000), (154, 212808), (198, 221256)):
         seed_everything(42)
-        reference = build_model(bands, "P_full")
+        reference = build_model(bands, **reference_kwargs)
         expected_rng = torch.get_rng_state().clone()
         seed_everything(42)
         released = RAAMNet(bands)
@@ -53,7 +54,7 @@ def run(reference_root):
         old_params = dict(reference.named_parameters())
         # Native Mamba CUDA reductions can vary at the last bits even when
         # repeating the same original model. Record that control explicitly.
-        control = build_model(198, "P_full").cuda().train()
+        control = build_model(198, **reference_kwargs).cuda().train()
         control.load_state_dict(reference.state_dict(), strict=True)
         seed_everything(91)
         control_logits = control(first, second)
@@ -87,8 +88,11 @@ def run(reference_root):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--reference-root", required=True)
+    parser.add_argument("--reference-module", default="reference_model")
+    parser.add_argument("--reference-factory", default="build_model")
+    parser.add_argument("--reference-kwargs", default="{}", help="JSON constructor keyword arguments")
     parser.add_argument("--output")
     args = parser.parse_args()
-    result = run(args.reference_root)
+    result = run(args.reference_root, args.reference_module, args.reference_factory, json.loads(args.reference_kwargs))
     if args.output:
         Path(args.output).write_text(json.dumps(result, indent=2))

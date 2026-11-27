@@ -89,7 +89,7 @@ def bddm_macs(height: int, width: int, bands: int, dim: int) -> int:
 
 
 def feature_fusion_macs(height: int, width: int, dim: int) -> int:
-    """MACs of one Stage39 ConvFeatureFusion (two independent modules)."""
+    """MACs of one ConvFeatureFusion (two independent modules)."""
     return (conv_macs(height, width, 2 * dim, dim)
             + conv_macs(height, width, dim, dim, kernel=3, groups=dim)
             + conv_macs(height, width, dim, dim))

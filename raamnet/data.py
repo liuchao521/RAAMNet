@@ -78,15 +78,15 @@ def load_scene(config_path: str | Path) -> tuple[np.ndarray, np.ndarray, np.ndar
     expected = config.get("expected_array_sha256", {})
     for name, value in (("date1", date1), ("date2", date2), ("labels_uint8", labels.astype(np.uint8))):
         if name in expected and array_sha256(value) != expected[name]:
-            raise ValueError(f"{name} differs from the frozen Stage39 scene; check MAT keys, layout, labels and normalization")
+            raise ValueError(f"{name} differs from the configured scene; check MAT keys, layout, labels and normalization")
     return date1, date2, labels
 
 
 def stratified_split(labels: np.ndarray, train_ratio: float, val_ratio: float,
                      seed: int) -> dict[str, np.ndarray]:
-    """Stage39 Python-RNG/ceil split; larger train sets skip the fixed val set.
+    """Python-RNG/ceil stratified split; larger train sets skip the fixed val set.
 
-    The default 1%/1% split exactly follows the archived full-model protocol.
+    The default 1%/1% split exactly follows the reported evaluation protocol.
     Load the delivered indices for reproducing any previously reported run.
     """
     if not 0.0 < train_ratio < 1.0 or not 0.0 < val_ratio < 1.0 or train_ratio + val_ratio >= 1.0:

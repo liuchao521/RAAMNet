@@ -10,7 +10,7 @@ import numpy as np
 import torch
 
 from raamnet import MODEL_VERSION
-from raamnet.checkpoints import load_stage39_checkpoint
+from raamnet.checkpoints import load_checkpoint
 from raamnet.data import load_scene, load_split
 from raamnet.engine import evaluate
 
@@ -24,7 +24,7 @@ def main() -> None:
     args = parser.parse_args()
     cube1, cube2, label_map = load_scene(args.scene)
     device = torch.device(args.device)
-    model, checkpoint = load_stage39_checkpoint(args.checkpoint, cube1.shape[-1], device)
+    model, checkpoint = load_checkpoint(args.checkpoint, cube1.shape[-1], device)
     date1 = torch.from_numpy(cube1).permute(2, 0, 1).unsqueeze(0).to(device)
     date2 = torch.from_numpy(cube2).permute(2, 0, 1).unsqueeze(0).to(device)
     labels = torch.from_numpy(label_map.reshape(-1)).long().to(device)

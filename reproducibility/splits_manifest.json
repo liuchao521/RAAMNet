@@ -1,0 +1,632 @@
+[
+  {
+    "dataset": "Farmland",
+    "seed": 42,
+    "file": "splits/Farmland/seed42.npz",
+    "sha256": "4087a1cb1b44b4e8abe90a38cb6fa824e8f64b3b00222579e78b3d5466d9f807",
+    "counts": {
+      "train": 631,
+      "val": 631,
+      "test": 61738
+    },
+    "indices_sha256": {
+      "train": "ab7b17a986ca678564feaf0913d8a9d746b56859b09d73a314c71d39f10385d9",
+      "val": "4be32f3f23c39bfeff09510bd56c55b1c17f8f7fbcc64185bf4b9c78dd70ff8d",
+      "test": "5afd2140e2d1e27bd0859f381501de587472d7120b4524cac0dfc63d8e1cb8cc"
+    },
+    "label_shape": [
+      450,
+      140
+    ],
+    "labels_uint8_sha256": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+  },
+  {
+    "dataset": "Farmland",
+    "seed": 43,
+    "file": "splits/Farmland/seed43.npz",
+    "sha256": "5250b745c73203b62449be0566871a36b96616d22c8ca95283d447253f0fd914",
+    "counts": {
+      "train": 631,
+      "val": 631,
+      "test": 61738
+    },
+    "indices_sha256": {
+      "train": "b42bdeb0bcb055fa8ce498abbbb372b5fe325daa06a3b21f86f8b6d84a1ddbfb",
+      "val": "22b1c46e1c3d74b1451b1773cd8fd95c620a67dff66d163228ef80294f80ee14",
+      "test": "4bacfb2e9427846148db451906c838040ff2ddae6ab1beebeb050d2bf2e18070"
+    },
+    "label_shape": [
+      450,
+      140
+    ],
+    "labels_uint8_sha256": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+  },
+  {
+    "dataset": "Farmland",
+    "seed": 44,
+    "file": "splits/Farmland/seed44.npz",
+    "sha256": "00b12e41779a8214274084acd1a05c43ef648f09eb3334dc19e2896fc3a63892",
+    "counts": {
+      "train": 631,
+      "val": 631,
+      "test": 61738
+    },
+    "indices_sha256": {
+      "train": "507ebddc32036f68c403c0a490e31d7974d4a6335ba1c2c9ef87707d9b57db3b",
+      "val": "88d66130097fdcc58c401bde84054f6448760821dfa443dea9a5a635ef0e1f67",
+      "test": "60dc35914b71742af41de0cd7105a4cbf68a1b366223a9f0090e94844ae59e82"
+    },
+    "label_shape": [
+      450,
+      140
+    ],
+    "labels_uint8_sha256": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+  },
+  {
+    "dataset": "Farmland",
+    "seed": 45,
+    "file": "splits/Farmland/seed45.npz",
+    "sha256": "b212a2094911785b64f74312ba5ed2c6ed1387ae81c9e831eafc3cb20ff81f6d",
+    "counts": {
+      "train": 631,
+      "val": 631,
+      "test": 61738
+    },
+    "indices_sha256": {
+      "train": "0a0b9d1d69c09f560dc075972105b08b0725068f3edfc55aa58d0d70d4776877",
+      "val": "00c80e4e99629d7f21f51deee8330e039015ad59eb7307c43ac2d92f0fd2df6b",
+      "test": "c9eb398cc6cb64d80a773c03ca6c449b1d7c607721f8ef67e565c2150fae6934"
+    },
+    "label_shape": [
+      450,
+      140
+    ],
+    "labels_uint8_sha256": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+  },
+  {
+    "dataset": "Farmland",
+    "seed": 46,
+    "file": "splits/Farmland/seed46.npz",
+    "sha256": "3028ce273891e2f89949585765736f38c71f439591d39938f00e577a715258fc",
+    "counts": {
+      "train": 631,
+      "val": 631,
+      "test": 61738
+    },
+    "indices_sha256": {
+      "train": "27aafd1fc980d29bb236dbc6483c3346af784acf9b829e14d72437b7f5612459",
+      "val": "60afbccab4d0e71eecc1247a3827753ed20968d3154ab526c16ab3895e7a531b",
+      "test": "df56dcafe9a2af4ffa45a53c7cc9bc2119b8c24e5a7dbcd83ec0c73f827901a7"
+    },
+    "label_shape": [
+      450,
+      140
+    ],
+    "labels_uint8_sha256": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+  },
+  {
+    "dataset": "Farmland",
+    "seed": 47,
+    "file": "splits/Farmland/seed47.npz",
+    "sha256": "d5dafff74b79bf2d7a1ba3fb15b576d1d60effccbeb14122c4fcbdfec726e4f6",
+    "counts": {
+      "train": 631,
+      "val": 631,
+      "test": 61738
+    },
+    "indices_sha256": {
+      "train": "c91937fb7522e6c9f0fbe2b8f9d93ea5fffa87d56de0b27d7fffe98e3dde38c0",
+      "val": "e40996304111b4f13160465c81d7e30e898130a8786989270b86d4127774584a",
+      "test": "133e5fd4196142d867077f12c36abd51288d3e3dd87e8191a478f867ca716727"
+    },
+    "label_shape": [
+      450,
+      140
+    ],
+    "labels_uint8_sha256": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+  },
+  {
+    "dataset": "Farmland",
+    "seed": 48,
+    "file": "splits/Farmland/seed48.npz",
+    "sha256": "61ac075bc0b8a81a09d780912546da7413daf8907790f6b70734adbc8496470c",
+    "counts": {
+      "train": 631,
+      "val": 631,
+      "test": 61738
+    },
+    "indices_sha256": {
+      "train": "e4c9ac75999573ebd83741076e8842822ce03053229870fd2fbe39d55eb0cbb3",
+      "val": "5b32043e15e7a2db879fa83fe89f00658df13fa075a1176d8bebc28428582d82",
+      "test": "1f6a105e53e71082e23f13a4af39e0c817259a82665e8d863d1b71c7dd922360"
+    },
+    "label_shape": [
+      450,
+      140
+    ],
+    "labels_uint8_sha256": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+  },
+  {
+    "dataset": "Farmland",
+    "seed": 49,
+    "file": "splits/Farmland/seed49.npz",
+    "sha256": "aeb7c2c09ee4c10fb08f0539576f9286653055798ee5421d79752dd9716ef495",
+    "counts": {
+      "train": 631,
+      "val": 631,
+      "test": 61738
+    },
+    "indices_sha256": {
+      "train": "f0a4e36806a5ef57c90f68ed05d43761c8d27f1beccd1acad866da7b45bf5c8c",
+      "val": "347c857becfc7f662673887b6348e7bd72b86c43f9bb4fe782be28661244365a",
+      "test": "da92e7e8f090c6e6222e9bb5b4b545760f8ae14703e8ba62e988d5ba8d9a16b7"
+    },
+    "label_shape": [
+      450,
+      140
+    ],
+    "labels_uint8_sha256": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+  },
+  {
+    "dataset": "Farmland",
+    "seed": 50,
+    "file": "splits/Farmland/seed50.npz",
+    "sha256": "76c1ada067df8f3277548e5bad6ac87c9102aa3ab2fa68873e0d76bf751eb250",
+    "counts": {
+      "train": 631,
+      "val": 631,
+      "test": 61738
+    },
+    "indices_sha256": {
+      "train": "091ec155c8ff1714b6c53d118fc8a075202dcb77cba17f5dda5089fc25e8bb51",
+      "val": "a14442b0204ca6227a90d74d45d588bcfe5a86b351a5877d6b0f6d909f909f42",
+      "test": "6e44807870b8e061bbf9a0cd18d94ffa15eb5945c3a8b22bb8dda2b199f94c8d"
+    },
+    "label_shape": [
+      450,
+      140
+    ],
+    "labels_uint8_sha256": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+  },
+  {
+    "dataset": "Farmland",
+    "seed": 51,
+    "file": "splits/Farmland/seed51.npz",
+    "sha256": "27a94e1633e628b45ff3f2c44345850fe2170da9632b52088b2bbd9e49f6eaa7",
+    "counts": {
+      "train": 631,
+      "val": 631,
+      "test": 61738
+    },
+    "indices_sha256": {
+      "train": "5f82858e63fb35ee2aacece95c93f7445bead30ef0cb26625aa5504c95c4a7ac",
+      "val": "2a1911e9dc6ff71ed14714ce77c17c624006bb10dadbc316808e98252449f3bc",
+      "test": "00df6e040a1f6c144b0378588366253bc3ac94fd8dd8bd1d36ecfeee0dbcdf2a"
+    },
+    "label_shape": [
+      450,
+      140
+    ],
+    "labels_uint8_sha256": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+  },
+  {
+    "dataset": "USA",
+    "seed": 42,
+    "file": "splits/USA/seed42.npz",
+    "sha256": "6f08b46dfdd8d4f2239f2cbc7cbaf5083a739c0d8318439ab5a22f9e06cd13df",
+    "counts": {
+      "train": 741,
+      "val": 741,
+      "test": 72505
+    },
+    "indices_sha256": {
+      "train": "e5e4b393cf600541a038ea287b8aa126c4fbe786b4749ca0f54498509f59413e",
+      "val": "f53e9b2d1742ca695b6562da6b96a86bdb22b775f242deec1dae018e8d3ff405",
+      "test": "0074c69e38e55df0573f7968efb2e3384d92d21fc33bf4e82a704e95695adbfb"
+    },
+    "label_shape": [
+      307,
+      241
+    ],
+    "labels_uint8_sha256": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+  },
+  {
+    "dataset": "USA",
+    "seed": 43,
+    "file": "splits/USA/seed43.npz",
+    "sha256": "12419c0119fc460ff3cee40227fb3b4ee216949bb406a7b78456ae409c57cb58",
+    "counts": {
+      "train": 741,
+      "val": 741,
+      "test": 72505
+    },
+    "indices_sha256": {
+      "train": "f5ff53f4444dd826a011523612c9348f7d115afb8418f5eeb5a9761f00f721e9",
+      "val": "70c743a1bd990d6a54534bcd6efe5dac0a1715b6243c9b7875709730e4135d98",
+      "test": "ff9024eec9792dbefd1723e6a2460ed15fc7e31a016be9280e1d7a1923301573"
+    },
+    "label_shape": [
+      307,
+      241
+    ],
+    "labels_uint8_sha256": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+  },
+  {
+    "dataset": "USA",
+    "seed": 44,
+    "file": "splits/USA/seed44.npz",
+    "sha256": "0fa3e1b6b9c10425aeb9b84a3fb1b1aee569bc127e69dda0ab60254468a034c5",
+    "counts": {
+      "train": 741,
+      "val": 741,
+      "test": 72505
+    },
+    "indices_sha256": {
+      "train": "09bc4d31a99b11eff2d343d99ff4233989b190596f6464921d43bf3c1a81b0a7",
+      "val": "46d1afb907dd238bbe19e7450c049e172ac46f1d725b7b7a037989a050507bee",
+      "test": "363c87f8d81464bc508645bcd852831ca810c73f22951b48bf0d827e59b0cffe"
+    },
+    "label_shape": [
+      307,
+      241
+    ],
+    "labels_uint8_sha256": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+  },
+  {
+    "dataset": "USA",
+    "seed": 45,
+    "file": "splits/USA/seed45.npz",
+    "sha256": "ee8599d2bcc9b06ac4b140d011fea6d0a483525a8c90f08740dd216014e64e21",
+    "counts": {
+      "train": 741,
+      "val": 741,
+      "test": 72505
+    },
+    "indices_sha256": {
+      "train": "fac7cf98a8c675289bc3c3e7d1fdafbcbd335a241a2a9cfac75e37cc948575b0",
+      "val": "331b709747d466c36f135a360ab618414beaef71ea984074563c4dd840a9941e",
+      "test": "e443e28e1c9619049581681a8e29fe589cb76bcf1bf0e84e1134a097a4fac5cc"
+    },
+    "label_shape": [
+      307,
+      241
+    ],
+    "labels_uint8_sha256": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+  },
+  {
+    "dataset": "USA",
+    "seed": 46,
+    "file": "splits/USA/seed46.npz",
+    "sha256": "747a93dd657d4bcb48373652ead2c71aa70c523d14bea8f9ef02f0e49493753c",
+    "counts": {
+      "train": 741,
+      "val": 741,
+      "test": 72505
+    },
+    "indices_sha256": {
+      "train": "234efd0971194e797ec8e3dde271de138043f9e573e5d92580538acfe071e6eb",
+      "val": "754c04086d211555e687b013a75bad8ee3840f3bc81010aa146532a8661250c2",
+      "test": "171c453ccce7553d56e9a928a04bc488de1d141c41e4cee10d085fc4577fd18c"
+    },
+    "label_shape": [
+      307,
+      241
+    ],
+    "labels_uint8_sha256": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+  },
+  {
+    "dataset": "USA",
+    "seed": 47,
+    "file": "splits/USA/seed47.npz",
+    "sha256": "0c7c24e97574cef9dc8169e5c86c25b8d232624b34d63aa2a92a4a048b5d17aa",
+    "counts": {
+      "train": 741,
+      "val": 741,
+      "test": 72505
+    },
+    "indices_sha256": {
+      "train": "6e00045ae637198dadd5fdf5adde66a922513cc5281934628c3e815ce13c69c2",
+      "val": "77d4a71af253d1b935c184ed2467b24cc35ae04b7a709cebfc66d4d5f6704666",
+      "test": "7e511f1da24d2100d1c05c12838db97e54aaed01895bfe34dfe11d9e70d3a7ef"
+    },
+    "label_shape": [
+      307,
+      241
+    ],
+    "labels_uint8_sha256": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+  },
+  {
+    "dataset": "USA",
+    "seed": 48,
+    "file": "splits/USA/seed48.npz",
+    "sha256": "94985cf562dcd41984dfed990b4a3c08f2cc85f903ad3a7fda628d028d798aa6",
+    "counts": {
+      "train": 741,
+      "val": 741,
+      "test": 72505
+    },
+    "indices_sha256": {
+      "train": "a1d1de1c339b4b9857a45c4b7d760faa75816f882e1bdced0a03fe6066b76267",
+      "val": "6e8ec01b4e952bc5f955012b1c0b23bd41a9a321100196dbbd203f0b4d6021f2",
+      "test": "085d3105945f72f2e6040a873e017086bd3367ee3279c92be6b1cfd338745091"
+    },
+    "label_shape": [
+      307,
+      241
+    ],
+    "labels_uint8_sha256": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+  },
+  {
+    "dataset": "USA",
+    "seed": 49,
+    "file": "splits/USA/seed49.npz",
+    "sha256": "ea96582ca5159e30852087b64a6e93d1f912dad90642a10d785c7bb5173607cc",
+    "counts": {
+      "train": 741,
+      "val": 741,
+      "test": 72505
+    },
+    "indices_sha256": {
+      "train": "832d294faebcb2b41daf0baa86f317634864ec11ddd8659b4ab327221a303b87",
+      "val": "b601e50c9807fcfaaa796a7650294d627e2f4c9da5c9040681fa9e0a57d78c9e",
+      "test": "29ce3851048d995200aec4a9a6748755eca51e8e5f44d2ff572245fa4167c9ff"
+    },
+    "label_shape": [
+      307,
+      241
+    ],
+    "labels_uint8_sha256": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+  },
+  {
+    "dataset": "USA",
+    "seed": 50,
+    "file": "splits/USA/seed50.npz",
+    "sha256": "f7f535433b6283649f69f20e734e18dbf7ff41978382fff0ec3316cda74f8d04",
+    "counts": {
+      "train": 741,
+      "val": 741,
+      "test": 72505
+    },
+    "indices_sha256": {
+      "train": "2c082582601e9366d8a6123a6fba60734097cb63dac84e5c6df1608fe5af7f5d",
+      "val": "389c6ea1dd4774ee6e8d05d0bbec5b9f69400750ac6fd60e4360a67b5d4744f3",
+      "test": "6b458c4f3191fa9ac659e6bca7cab7d1d29155bec8be08a932ab0191d0777a49"
+    },
+    "label_shape": [
+      307,
+      241
+    ],
+    "labels_uint8_sha256": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+  },
+  {
+    "dataset": "USA",
+    "seed": 51,
+    "file": "splits/USA/seed51.npz",
+    "sha256": "1e8b97f528f9fb8df0d75ce718ca56a0edcab65066a54cd05cf710e2d3b931a2",
+    "counts": {
+      "train": 741,
+      "val": 741,
+      "test": 72505
+    },
+    "indices_sha256": {
+      "train": "98f546e8febfba7d543a49224855178620876bd728b13e231fa45a2a3b33d921",
+      "val": "7c4c86678de93052ab9fd197f893c1b7a622db3883fd29ec74d0a7f23bbe7da9",
+      "test": "a2a03cea78bd32a6400ec7dc538e49240b19e1074d09509458b29e359eea4d74"
+    },
+    "label_shape": [
+      307,
+      241
+    ],
+    "labels_uint8_sha256": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+  },
+  {
+    "dataset": "River",
+    "seed": 42,
+    "file": "splits/River/seed42.npz",
+    "sha256": "71ea469d8660a62a10de62d10317ab6e7324810ca081e77025dc075f5a734a39",
+    "counts": {
+      "train": 1116,
+      "val": 1116,
+      "test": 109351
+    },
+    "indices_sha256": {
+      "train": "df9fae4dea98397b1086fb65515424861bfe1eb301b1b18ffa63886e5e3f0b8d",
+      "val": "beaefaeb87801a9d697f0e95b1107e15e25fc1c4a62830b4a373b2f488c77519",
+      "test": "6a68ed34e807c2f0fd1d76a9db6367c40b6f257c8421b0d7431b92fe9e215486"
+    },
+    "label_shape": [
+      463,
+      241
+    ],
+    "labels_uint8_sha256": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+  },
+  {
+    "dataset": "River",
+    "seed": 43,
+    "file": "splits/River/seed43.npz",
+    "sha256": "e2264c373b64e7c51d88713d49746c8d1ce09c1dfb5034d5992e6cd57261a9da",
+    "counts": {
+      "train": 1116,
+      "val": 1116,
+      "test": 109351
+    },
+    "indices_sha256": {
+      "train": "2ae32b652b83d24fb369f45e3ec89cb3526e6e89f3fb696000a982d2dd7d6228",
+      "val": "94bc51e57ca3aacc546f7bcaa03985894fbf45f7c156098e93a292aaf204c483",
+      "test": "e444827c9350769265d1c573a610e5f8a061e1d44c682da137a152a5d61640e2"
+    },
+    "label_shape": [
+      463,
+      241
+    ],
+    "labels_uint8_sha256": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+  },
+  {
+    "dataset": "River",
+    "seed": 44,
+    "file": "splits/River/seed44.npz",
+    "sha256": "c9c4c6ea8a4a3c39ba23c4bc66a5911c091d1bbacb29cc46558ea62d6bd95e78",
+    "counts": {
+      "train": 1116,
+      "val": 1116,
+      "test": 109351
+    },
+    "indices_sha256": {
+      "train": "084e274da076a8fd7336dc9fa49f0e47e7768857c94a94ffe9113f22abcda2fc",
+      "val": "8f6c79355c439739041decec6a004784b80bfb0704ed30c031529c36a38b04f9",
+      "test": "531abaea946efb5a0cd49ae0da7b8e7f93e13741e82276ae2cfe24537b0b4e13"
+    },
+    "label_shape": [
+      463,
+      241
+    ],
+    "labels_uint8_sha256": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+  },
+  {
+    "dataset": "River",
+    "seed": 45,
+    "file": "splits/River/seed45.npz",
+    "sha256": "b2e05131789453db3f3e64207db1a1e2c37f60d144bf649fec5beaf8824c0945",
+    "counts": {
+      "train": 1116,
+      "val": 1116,
+      "test": 109351
+    },
+    "indices_sha256": {
+      "train": "ce12847d8a496b3a3f1453b1654e49236978aa231afcac811e4e01788e5bc921",
+      "val": "73a74e3f67f0c262322b5ef0499e65f900e1a95364447e1cf98938ad9b825021",
+      "test": "61e6fe386234f965cd5c0146014851f2ee7330ab1cf336a660f359baf9a8e32b"
+    },
+    "label_shape": [
+      463,
+      241
+    ],
+    "labels_uint8_sha256": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+  },
+  {
+    "dataset": "River",
+    "seed": 46,
+    "file": "splits/River/seed46.npz",
+    "sha256": "10cc6d967cf2e7c5368cd4aa13015138bd065d9d04a611dee0a70d6501c5752a",
+    "counts": {
+      "train": 1116,
+      "val": 1116,
+      "test": 109351
+    },
+    "indices_sha256": {
+      "train": "85638c4b5c0101434315d2f043bbbc4fabf1b72ed2ddd58a707fa1bb3139b13a",
+      "val": "31cd7dc316bc2e48a59c6561e9729a5e322181157037756bc2f587d9df0f3897",
+      "test": "03da5508659706ddad2d3754bbb27c947dd23624bd383223918289f958a611a0"
+    },
+    "label_shape": [
+      463,
+      241
+    ],
+    "labels_uint8_sha256": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+  },
+  {
+    "dataset": "River",
+    "seed": 47,
+    "file": "splits/River/seed47.npz",
+    "sha256": "cbfe2885efa831b01c3639376325ee00b3c4270e7e7c94d89f27df6d002d5685",
+    "counts": {
+      "train": 1116,
+      "val": 1116,
+      "test": 109351
+    },
+    "indices_sha256": {
+      "train": "8defe54579eeb19fe0c0b67700d6792a853d7b092134a51fa81f3cbd52cc19c0",
+      "val": "359adbd44432a6c7e97948fa0851f0edebfa878d65b43f0a6d119c87de966483",
+      "test": "c9e48ed7ba59beed5ec759d51a16c4922a0c28e3f701960ecd8e3dbeb4c162cf"
+    },
+    "label_shape": [
+      463,
+      241
+    ],
+    "labels_uint8_sha256": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+  },
+  {
+    "dataset": "River",
+    "seed": 48,
+    "file": "splits/River/seed48.npz",
+    "sha256": "df2642a69b63af5ded1ed3be2f07b0e2641c8ea71d0adc6b688d0bd56509100c",
+    "counts": {
+      "train": 1116,
+      "val": 1116,
+      "test": 109351
+    },
+    "indices_sha256": {
+      "train": "e2df90255bcbe0335cd5d6bb086cc0af954631e49fd83f77a6e6782a96bd0ab2",
+      "val": "44b5b7c331e1f6c72ae135ac4d082234c7cc23f9376c353f70c7d2899b2f17c9",
+      "test": "925baf9ab9300e12f3e0b440b5028d52bbbb22adc03b8b0a4ca41f087831e482"
+    },
+    "label_shape": [
+      463,
+      241
+    ],
+    "labels_uint8_sha256": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+  },
+  {
+    "dataset": "River",
+    "seed": 49,
+    "file": "splits/River/seed49.npz",
+    "sha256": "319fa0ce4fcb8b023bc6466cbc920ad0a93cc9539d969f0098312788f8c07c51",
+    "counts": {
+      "train": 1116,
+      "val": 1116,
+      "test": 109351
+    },
+    "indices_sha256": {
+      "train": "74ea8c6c016f39f89ba185eb42eaa6d1e382d0c96242cdab12694ef7afb794a0",
+      "val": "30838ccb67060d636f03ee7e2ba699c20b8e84c2806a546ef198883857dfd1e7",
+      "test": "10e0f7f0813dac9e9501123e896fa6cf3e83d1d389ab52c79d65ac15364359f6"
+    },
+    "label_shape": [
+      463,
+      241
+    ],
+    "labels_uint8_sha256": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+  },
+  {
+    "dataset": "River",
+    "seed": 50,
+    "file": "splits/River/seed50.npz",
+    "sha256": "b10c3f985f54040e6c76374f84873345811ccd74cd79acda007e28a52beecfc2",
+    "counts": {
+      "train": 1116,
+      "val": 1116,
+      "test": 109351
+    },
+    "indices_sha256": {
+      "train": "c61e8bc97442c43c6467bcb81444a43b8937b221c1b2591e523e2bc6289feddc",
+      "val": "e27a482f0ec09d970bb085992589f8c5428a651d470edcf958cd861f058609ca",
+      "test": "cf97528b5bcec8465f6c2c072eb541b05b7a8cefa24c6d91069f2dfa963c5eb6"
+    },
+    "label_shape": [
+      463,
+      241
+    ],
+    "labels_uint8_sha256": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+  },
+  {
+    "dataset": "River",
+    "seed": 51,
+    "file": "splits/River/seed51.npz",
+    "sha256": "201a070cda62c871ce22259c284cefcd2c12a150a13dfb963d5ea0b2a7d0ba50",
+    "counts": {
+      "train": 1116,
+      "val": 1116,
+      "test": 109351
+    },
+    "indices_sha256": {
+      "train": "afe15c44fedd341a0fa6d5e56af3d321ccba73ab832d07e034d852b213e34c52",
+      "val": "8e18a235c708fe26eb88277c3d1e093b3bb01610527f1d6eac700198bea1c3f0",
+      "test": "3634dca7185a09d4755fe96814f4a6d5596fe5d8e902446b013ca009784296c7"
+    },
+    "label_shape": [
+      463,
+      241
+    ],
+    "labels_uint8_sha256": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+  }
+]

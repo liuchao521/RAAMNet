@@ -1,0 +1,19 @@
+{
+  "date1_path": "../data/USA/USA1.mat",
+  "date1_key": "T1",
+  "date2_path": "../data/USA/USA2.mat",
+  "date2_key": "T2",
+  "label_path": "../data/USA/GT.mat",
+  "label_key": "GT",
+  "positive_values": [
+    1
+  ],
+  "dataset": "USA",
+  "cube_layout": "HWC",
+  "standardize": true,
+  "expected_array_sha256": {
+    "date1": "99757ac972cd6774bb8ba1f7ca78725c3614c92141b8d8e0f827ec9ec4f294f9",
+    "date2": "8997be784e6794375b57dcf12a3b20c660b696739c9c720cb511a3c8b5e036a9",
+    "labels_uint8": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+  }
+}

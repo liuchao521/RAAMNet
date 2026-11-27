@@ -21,7 +21,6 @@ from raamnet import RAAMNet
 
 DEFAULT_SCENES = {
     "Farmland": (450, 140, 155),
-    "Hermiston": (390, 200, 242),
     "River": (463, 241, 198),
     "USA": (307, 241, 154),
 }
@@ -66,9 +65,8 @@ def bddm_macs(height: int, width: int, bands: int, dim: int) -> int:
     low_h, low_w = (height + 1) // 2, (width + 1) // 2
     full, half = 0, 0
 
-    # Temporal projection and four fixed directional depth-wise filters.
-    full += 2 * conv_macs(height, width, bands, dim)
-    full += 2 * height * width * dim * 4 * 3 * 3
+    # Four fixed directional filters act once on the reference feature.
+    full += height * width * dim * 4 * 3 * 3
     full += conv_macs(height, width, dim, dim, kernel=3)  # base path
 
     full += conv_macs(height, width, dim, high)
@@ -91,12 +89,10 @@ def bddm_macs(height: int, width: int, bands: int, dim: int) -> int:
 
 
 def feature_fusion_macs(height: int, width: int, dim: int) -> int:
-    """MACs of one Feature Fusion Module (two such modules are used)."""
-    hidden = max(dim // 4, 1)
-    spatial = conv_macs(height, width, dim, hidden, kernel=3)
-    spatial += conv_macs(height, width, hidden, dim, kernel=3)
-    pooled = 2 * (dim * hidden + hidden * dim)  # avg and max branches
-    return spatial + pooled
+    """MACs of one Stage39 ConvFeatureFusion (two independent modules)."""
+    return (conv_macs(height, width, 2 * dim, dim)
+            + conv_macs(height, width, dim, dim, kernel=3, groups=dim)
+            + conv_macs(height, width, dim, dim))
 
 
 def prcf_macs(height: int, width: int, dim: int) -> int:

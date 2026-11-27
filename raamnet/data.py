@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import json
+import hashlib
+import math
+import random
 from pathlib import Path
 
 import numpy as np
@@ -72,29 +75,62 @@ def load_scene(config_path: str | Path) -> tuple[np.ndarray, np.ndarray, np.ndar
         raise ValueError("the chosen positive_values do not produce two classes")
     if config.get("standardize", True):
         date1, date2 = standardize_bands(date1), standardize_bands(date2)
+    expected = config.get("expected_array_sha256", {})
+    for name, value in (("date1", date1), ("date2", date2), ("labels_uint8", labels.astype(np.uint8))):
+        if name in expected and array_sha256(value) != expected[name]:
+            raise ValueError(f"{name} differs from the frozen Stage39 scene; check MAT keys, layout, labels and normalization")
     return date1, date2, labels
 
 
 def stratified_split(labels: np.ndarray, train_ratio: float, val_ratio: float,
                      seed: int) -> dict[str, np.ndarray]:
-    """Create disjoint full-scene indices for train, validation, and test."""
+    """Stage39 Python-RNG/ceil split; larger train sets skip the fixed val set.
+
+    The default 1%/1% split exactly follows the archived full-model protocol.
+    Load the delivered indices for reproducing any previously reported run.
+    """
     if not 0.0 < train_ratio < 1.0 or not 0.0 < val_ratio < 1.0 or train_ratio + val_ratio >= 1.0:
         raise ValueError("train_ratio and val_ratio must be positive and sum to less than one")
     flattened = np.asarray(labels).reshape(-1)
-    rng = np.random.default_rng(seed)
-    train, validation, test = [], [], []
+    rng = random.Random(seed)
+    train, validation = [], []
     for value in (0, 1):
-        index = np.flatnonzero(flattened == value)
+        index = np.flatnonzero(flattened == value).tolist()
         rng.shuffle(index)
-        count_train = max(1, int(round(index.size * train_ratio)))
-        count_val = max(1, int(round(index.size * val_ratio)))
-        if count_train + count_val >= index.size:
+        base = math.ceil(len(index) * 0.01)
+        count_train = math.ceil(len(index) * train_ratio)
+        count_val = math.ceil(len(index) * val_ratio)
+        if max(base, count_train) + count_val >= len(index):
             raise ValueError(f"class {value} is too small for the requested split")
-        train.append(index[:count_train])
-        validation.append(index[count_train:count_train + count_val])
-        test.append(index[count_train + count_val:])
-    return {
-        "train": np.sort(np.concatenate(train)).astype(np.int64),
-        "val": np.sort(np.concatenate(validation)).astype(np.int64),
-        "test": np.sort(np.concatenate(test)).astype(np.int64),
-    }
+        selected = index[:count_train] if count_train <= base else index[:base] + index[base + count_val:base + count_val + count_train - base]
+        train.extend(selected)
+        validation.extend(index[base:base + count_val])
+    train = np.asarray(train, dtype=np.int64)
+    validation = np.asarray(validation, dtype=np.int64)
+    mask = np.ones(flattened.size, dtype=bool)
+    mask[np.r_[train, validation]] = False
+    result = {"train": train, "val": validation, "test": np.flatnonzero(mask)}
+    validate_split(result, flattened.size)
+    return result
+
+
+def validate_split(split: dict[str, np.ndarray], pixel_count: int) -> None:
+    """Reject overlaps, duplicates, out-of-range indices and missing pixels."""
+    for name in ("train", "val", "test"):
+        index = np.asarray(split[name])
+        if index.ndim != 1 or not np.issubdtype(index.dtype, np.integer) or not index.size:
+            raise ValueError(f"{name} must be a nonempty 1D integer index array")
+    combined = np.concatenate([split[name] for name in ("train", "val", "test")])
+    if not np.array_equal(np.sort(combined), np.arange(pixel_count)):
+        raise ValueError("split must partition all pixels exactly once")
+
+
+def load_split(path: str | Path, pixel_count: int) -> dict[str, np.ndarray]:
+    with np.load(path, allow_pickle=False) as saved:
+        result = {name: saved[name].copy() for name in ("train", "val", "test")}
+    validate_split(result, pixel_count)
+    return result
+
+
+def array_sha256(value: np.ndarray) -> str:
+    return hashlib.sha256(np.ascontiguousarray(value).tobytes()).hexdigest()

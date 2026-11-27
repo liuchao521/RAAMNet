@@ -17,3 +17,4 @@ data/
 *.npy
 *.npz
 *.mat
+!reproducibility/splits/**/*.npz

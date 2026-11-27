@@ -20,6 +20,9 @@ def seed_everything(seed: int) -> None:
     torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.allow_tf32 = True
+    torch.backends.cuda.matmul.allow_tf32 = False
+    torch.set_num_threads(2)
 
 
 def save_json(path: str | Path, payload: dict) -> None:

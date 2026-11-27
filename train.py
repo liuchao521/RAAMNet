@@ -14,8 +14,8 @@ import numpy as np
 import torch
 from torch.nn import functional as F
 
-from raamnet import RAAMNet
-from raamnet.data import load_scene, stratified_split
+from raamnet import MODEL_VERSION, RAAMNet
+from raamnet.data import array_sha256, load_scene, load_split, stratified_split
 from raamnet.engine import atomic_torch_save, evaluate, flatten_logits, save_json, seed_everything
 
 
@@ -25,7 +25,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", required=True, help="directory for splits, checkpoints, and results")
     parser.add_argument("--seed", required=True, type=int)
     parser.add_argument("--epochs", default=300, type=int)
-    parser.add_argument("--learning-rate", default=1e-3, type=float)
+    parser.add_argument("--learning-rate", default=1e-4, type=float)
+    parser.add_argument("--split", help="archived Stage39 .npz indices (recommended for reproduction)")
     parser.add_argument("--train-ratio", default=0.01, type=float)
     parser.add_argument("--val-ratio", default=0.01, type=float)
     parser.add_argument("--save-interval", default=50, type=int)
@@ -48,13 +49,20 @@ def main() -> None:
     labels = torch.from_numpy(map_labels.reshape(-1)).long().to(device)
 
     split_path = output_dir / "splits" / f"seed{args.seed}.npz"
-    if split_path.exists():
-        cached = np.load(split_path)
-        split = {name: cached[name] for name in ("train", "val", "test")}
+    if (output_dir / "checkpoints" / f"best_seed{args.seed}.pt").exists():
+        raise FileExistsError("An existing best checkpoint would be overwritten; use a new output directory")
+    if args.split:
+        split = load_split(args.split, map_labels.size)
+        if split_path.exists():
+            cached = load_split(split_path, map_labels.size)
+            if not all(np.array_equal(cached[k], split[k]) for k in split):
+                raise ValueError("existing output split differs from --split")
+    elif split_path.exists():
+        split = load_split(split_path, map_labels.size)
     else:
         split = stratified_split(map_labels, args.train_ratio, args.val_ratio, args.seed)
-        split_path.parent.mkdir(parents=True, exist_ok=True)
-        np.savez_compressed(split_path, **split)
+    split_path.parent.mkdir(parents=True, exist_ok=True)
+    np.savez_compressed(split_path, **split)
     index = {name: torch.from_numpy(value).long().to(device) for name, value in split.items()}
 
     model = RAAMNet(bands=bands, dim=args.dim).to(device)
@@ -78,6 +86,7 @@ def main() -> None:
             best_val_loss, best_epoch = val_loss, epoch
             atomic_torch_save({
                 "epoch": epoch,
+                "model_version": MODEL_VERSION,
                 "bands": bands,
                 "dim": args.dim,
                 "model_state_dict": model.state_dict(),
@@ -88,6 +97,7 @@ def main() -> None:
         if epoch % args.save_interval == 0:
             atomic_torch_save({
                 "epoch": epoch,
+                "model_version": MODEL_VERSION,
                 "bands": bands,
                 "dim": args.dim,
                 "model_state_dict": model.state_dict(),
@@ -109,6 +119,9 @@ def main() -> None:
     test_loss, test_metrics, prediction = evaluate(model, date1, date2, labels, index["test"])
     result = {
         "scene": str(args.scene), "seed": args.seed, "epochs": args.epochs,
+        "model_version": MODEL_VERSION,
+        "input_array_sha256": {"date1": array_sha256(cube1), "date2": array_sha256(cube2), "labels": array_sha256(map_labels)},
+        "split_array_sha256": {k: array_sha256(v) for k, v in split.items()},
         "learning_rate": args.learning_rate, "bands": bands, "spatial_size": [height, width],
         "train_ratio": args.train_ratio, "val_ratio": args.val_ratio,
         "checkpoint_selection": "minimum validation cross-entropy",

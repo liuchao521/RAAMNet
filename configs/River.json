@@ -1,0 +1,19 @@
+{
+  "date1_path": "../data/River/CDdataset_River_463x241x198.mat",
+  "date1_key": "hsi_t1",
+  "date2_path": "../data/River/CDdataset_River_463x241x198.mat",
+  "date2_key": "hsi_t2",
+  "label_path": "../data/River/CDdataset_River_463x241x198.mat",
+  "label_key": "hsi_gt",
+  "positive_values": [
+    1
+  ],
+  "dataset": "River",
+  "cube_layout": "HWC",
+  "standardize": true,
+  "expected_array_sha256": {
+    "date1": "a3748ab1ebaecdad3596824f241f8cf4652119de39663879aed64850bbe4dee5",
+    "date2": "c2bb6514d88038920b56f89446b3ac6426c31c340d450a57587ec3813367a306",
+    "labels_uint8": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+  }
+}

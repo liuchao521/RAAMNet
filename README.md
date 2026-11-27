@@ -1,133 +1,167 @@
-# RAAM-Net: Role-Aware Asymmetric Network for Hyperspectral Image Change Detection
+# RAAM-Net: complete Stage39 P_full
 
-This repository contains a clean, self-contained implementation of the final
-RAAM-Net model for binary bitemporal hyperspectral image change detection.
-It contains no exploratory `v*`, `trial`, or dataset-specific experiment code.
+Full-scene binary hyperspectral image change detection with the **validated
+Stage39 P_full** architecture. This release has one public model and one
+training/evaluation protocol. It does not expose experimental fusion or
+operator-assignment switches.
 
 ## Architecture
 
 ```text
-Date 1, Date 2
-      │
-Temporal-Aware Spectral Gate (shared spectral calibration)
-      │
-Complementary reference/change role estimation
-      │
- ┌────┴──────────────────────────┐
- │ Reference evidence             │ Change evidence
- │ BDDM: directional octave detail│ Role-conditioned dual-axis BiMamba
- └──────────────┬─────────────────┘
-                │
-Progressive Cross-Role Fusion (FFM + residual correction)
-                │
-Pixel-wise binary change logits
+T1, T2 -> shared temporal-aware spectral gate -> complementary role cues
+  reference: concat(T1,T2) -> projection -> feature-only BDDM -> Lr
+  discrepancy: abs(T2-T1) -> projection -> role-conditioned dual-axis BiMamba -> Gc
+  enhanced base Bc = ConvFFM(Gc,Lr)
+  original base Br = ConvFFM(Fc0,Fr0)
+  original gated/selected PRCF -> concatenate -> pixel classifier
 ```
 
-The reference branch models temporally consistent local directional detail.
-The change branch uses the calibrated absolute difference and chooses between
-continuous horizontal and vertical BiMamba contexts according to bitemporal
-change-topology evidence. Complementary roles condition context injection but
-are not interpreted as hard change labels.
+BDDM computes directional magnitudes from the reference feature `Fr0`; it
+has no separate temporal projection. Each independent ConvFFM uses a
+balanced concatenation projection followed by depthwise-convolutional
+residual refinement. PRCF constructs interactions from
+`Ar=(Fr0+Lr)/2`, `Ac=(Gc+Fc0)/2`, `D=abs(Ac-Ar)`, and `A=Ac*Ar`.
+Its learned role gate and channel/spatial selector scale the two residual
+corrections. There are no additional interaction-projection layers.
+
+`raamnet/stage39.py` contains the active full-model implementation.
+`raamnet/_stage39_base.py` is the unchanged historical base snapshot. Its
+initialization order and parameter names are retained so original Stage39
+checkpoints load strictly and matched seeds start from the same tensors.
+The reference BDDM and both fusion modules are replaced during construction;
+the historical temporary modules do not remain in the final model.
 
 ## Installation
 
-Create an environment with a PyTorch build compatible with your CUDA runtime,
-then install the remaining packages:
+Use a CUDA-compatible PyTorch and mamba-ssm installation, then run:
 
 ```bash
 pip install -r requirements.txt
 pip install -e .
 ```
 
-`mamba-ssm` must be installed for the same Python, PyTorch, CUDA, and compiler
-combination that will run the experiment. Please consult the upstream
-`mamba-ssm` installation instructions if a binary wheel is unavailable.
+The archived experiment environment was Python 3.10, PyTorch 2.4.1+cu118,
+CUDA 11.8, cuDNN 90100, and an NVIDIA RTX 3090. Build Mamba and causal-conv1d
+for the same Python/PyTorch/CUDA combination. Full forward/backward execution
+requires a supported CUDA device.
 
-## Data configuration
+## Data and frozen splits
 
-Prepare each scene as two MAT cubes and one MAT label map. Copy
-[`configs/scene_example.json`](configs/scene_example.json), set the file paths
-and MAT variable names, then set `positive_values` explicitly. This last field
-is required because some public HSI-CD datasets use a nonzero unchanged label.
+Place the original MAT files under `data/` and edit only the file locations
+in `configs/Farmland.json`, `configs/USA.json`, or `configs/River.json`.
+The configs specify the actual MAT variable names, raw positive labels,
+per-date/per-band normalization and expected normalized-array hashes.
+In USA, raw label **1 is changed and 2 is unchanged**. The loader rejects
+hash mismatches rather than silently evaluating another data version.
 
-Supported cube layouts are `HWC` and `CHW`. Per-band scene standardization is
-enabled by default and can be disabled in the JSON configuration.
+`reproducibility/splits/` contains the 30 original full-model index files
+(three scenes, seeds 42-51). Use `--split` to reproduce a reported run.
+The default split generator also follows Stage39's Python `random.Random`
+and per-class `ceil` policy; identical seed numbers alone do not make NumPy
+random splits equivalent.
 
-## Reproduction
+| Scene | H x W x bands | Train | Validation | Test |
+|---|---|---:|---:|---:|
+| Farmland | 450 x 140 x 155 | 631 | 631 | 61,738 |
+| USA | 307 x 241 x 154 | 741 | 741 | 72,505 |
+| River | 463 x 241 x 198 | 1,116 | 1,116 | 109,351 |
 
-The example below trains a single seed. It creates disjoint class-stratified
-training (1%), validation (1%), and test splits. The validation loss selects
-the best checkpoint; test labels are not used for epoch selection.
+Random pixel partitions may share spatial context. Normalization uses the
+full unlabeled scene. These are within-scene results, not geographically
+independent generalization estimates. Dataset imagery and weights are not
+bundled in this source repository.
+
+## Train the complete model
 
 ```bash
-python train.py \
-  --scene configs/scene_example.json \
-  --output-dir runs/example_seed42 \
-  --seed 42 \
-  --epochs 300 \
-  --save-interval 50
+python train.py --scene configs/Farmland.json --seed 42 \
+  --split reproducibility/splits/Farmland/seed42.npz \
+  --output-dir runs/Farmland_seed42
 ```
 
-The command writes:
+Defaults match the complete Stage39 protocol: **300 epochs**, full-scene
+FP32, **Adam 1e-4**, no class weighting, StepLR(30,0.9), width 64,
+minimum validation cross-entropy checkpoint selection, and argmax prediction.
+No test threshold tuning, test-time augmentation, or postprocessing is used.
+CUDA matmul TF32 is disabled and cuDNN TF32 is enabled, matching the archive.
 
-- `splits/seed*.npz`: the reproducible split indices;
-- `checkpoints/best_seed*.pt`: validation-selected checkpoint;
-- `checkpoints/epoch050...epoch300*.pt`: periodic checkpoints;
-- `results/seed*.json`: OA, Kappa, F1, Precision, and Recall on the test set;
-- `results/seed*_prediction.npy`: full-scene binary prediction map.
+Outputs include the best and periodic checkpoints, exact split arrays,
+full-scene prediction, five test metrics, model-version metadata, and input
+and index hashes. Existing best checkpoints are protected from overwrite.
+Use the corresponding config/split/output path for USA or River and seeds
+43-51. A different learning rate, input or split defines a different run.
 
-Evaluate an existing best checkpoint with:
+## Evaluate release or original Stage39 weights
 
 ```bash
-python evaluate.py \
-  --scene configs/scene_example.json \
-  --checkpoint runs/example_seed42/checkpoints/best_seed42.pt \
-  --split runs/example_seed42/splits/seed42.npz
+python evaluate.py --scene configs/Farmland.json \
+  --checkpoint runs/Farmland_seed42/checkpoints/best_seed42.pt \
+  --split reproducibility/splits/Farmland/seed42.npz
 ```
 
-Aggregate multiple independent seed results with:
+Original Stage39 dictionaries with `model_state_dict` and the release
+checkpoint format are supported. Loading is strict; original pre-Stage39 or
+projected-fusion weights are not silently adapted. Five metrics are printed
+as fractions. Aggregate release training outputs using:
 
 ```bash
-python summarize.py --results runs/seed*/results/seed*.json
+python summarize.py --results runs/Farmland_seed*/results/seed*.json
 ```
 
-Measure trainable parameters and FLOPs for the four paper scenes:
+## Recorded complete-model results
+
+Mean and sample standard deviation over seeds 42-51; F1 is in percent.
+Raw counts for these 30 actual archived evaluations are provided in
+`reproducibility/full_model_10seed_confusions.csv`.
+
+| Scene | Changed-class F1 (%) | Parameters |
+|---|---:|---:|
+| Farmland | 96.7191 +/- 0.2249 | 213,000 |
+| USA | 95.4455 +/- 0.3028 | 212,808 |
+| River | 83.0049 +/- 1.4749 | 221,256 |
+
+These are recorded results, not a claim that retraining on every software or
+GPU version is bit-identical. Source SHA256 values and the frozen data/split
+manifests are included under `reproducibility/`.
+
+## Verification and profiling
+
+Actual release checks passed on the RTX 3090: 30 original checkpoints loaded
+strictly, all 30 generated/saved splits matched, and each scene's seed-42
+full prediction map had zero differences from its archived map. Initialization
+and RNG states matched exactly; training logits/loss were bit-identical.
+Gradient differences were about 1e-9, comparable to original-model CUDA
+repeat differences. Training/evaluation CLI smoke checks also passed.
+See [the verification record](reproducibility/release_verification.json).
 
 ```bash
-python profile_complexity.py --device cuda
-```
-
-The script reports `FLOPs = 2 × MACs`. It includes Mamba's dense projections
-and one-dimensional convolution but excludes the selective-scan recurrence;
-use the same convention for every compared model.
-
-Before training on a scene, verify the model environment with:
-
-```bash
+python -m unittest discover -s tests -p 'test_*.py'
 python tests/test_model.py
+python profile_complexity.py
 ```
+
+With the original immutable Stage39 source available, compare initialization,
+RNG state, training logits, loss and gradients on an idle CUDA device:
+
+```bash
+python tests/verify_stage39_reference.py --reference-root /path/to/Stage39
+```
+
+`profile_complexity.py` counts convolution and dense-projection operations,
+including Mamba projections/convolution, but excludes selective-scan
+recurrence. FLOPs = 2 x MACs; normalization, nonlinearities and elementwise
+operations are outside this analytical convention. `profile_legacy_thop.py`
+is a separately labeled legacy counting utility, not an inference benchmark.
 
 ## Repository layout
 
 ```text
-raamnet/
-  model.py       # TASG, role estimator, BDDM, dual-axis BiMamba, PRCF
-  data.py        # MAT loading, standardization, reproducible stratified split
-  metrics.py     # OA, Kappa, F1, Precision, Recall
-  engine.py      # training/evaluation helpers
-train.py         # full-scene training entry point
-evaluate.py      # checkpoint evaluation entry point
-summarize.py      # mean ± sample standard deviation over seed results
-profile_complexity.py  # Params, MACs, and FLOPs (selective scan excluded)
-configs/         # scene configuration template
-tests/           # model smoke test
+raamnet/stage39.py          complete Stage39 model
+raamnet/_stage39_base.py    immutable historical initialization/base layers
+raamnet/data.py             normalization, hashes and original split policy
+raamnet/checkpoints.py      strict original/release checkpoint loader
+train.py / evaluate.py      full-model training and evaluation
+configs/                   three verified scene configurations
+reproducibility/            full-model counts, source/data hashes and 30 splits
+tests/                     partition, model and original-source parity checks
 ```
-
-## Notes
-
-- The implementation performs full-scene inference. GPU memory scales with the
-  image height, width, band count, and hidden dimension.
-- Report mean and standard deviation over independent seeds, rather than a
-  single selected test run.
-- Retain the exact preprocessing, label mapping, split protocol, and model
-  configuration used in any comparison for a fair reproduction.

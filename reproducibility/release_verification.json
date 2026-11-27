@@ -1,0 +1,150 @@
+{
+  "passed": true,
+  "model_version": "Stage39_P_full",
+  "torch": "2.4.1+cu118",
+  "cuda": "11.8",
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "original_reference_parity": {
+    "passed": true,
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "torch": "2.4.1+cu118",
+    "cases": [
+      {
+        "bands": 155,
+        "parameters": 213000,
+        "initial_tensors_and_rng_identical": true
+      },
+      {
+        "bands": 154,
+        "parameters": 212808,
+        "initial_tensors_and_rng_identical": true
+      },
+      {
+        "bands": 198,
+        "parameters": 221256,
+        "initial_tensors_and_rng_identical": true
+      },
+      {
+        "shape": [
+          8,
+          10
+        ],
+        "train_logits_and_loss_bit_identical": true,
+        "gradients_close": true,
+        "gradient_rtol": 1e-05,
+        "gradient_atol": 1e-07,
+        "gradient_max_abs_difference": 7.566995918750763e-10,
+        "original_repeat_gradient_max_abs_difference": 4.656612873077393e-10
+      },
+      {
+        "shape": [
+          9,
+          11
+        ],
+        "train_logits_and_loss_bit_identical": true,
+        "gradients_close": true,
+        "gradient_rtol": 1e-05,
+        "gradient_atol": 1e-07,
+        "gradient_max_abs_difference": 1.1641532182693481e-09,
+        "original_repeat_gradient_max_abs_difference": 8.149072527885437e-10
+      }
+    ]
+  },
+  "original_checkpoint_strict_loads": 30,
+  "exact_saved_and_generated_split_cases": 30,
+  "actual_seed42_full_scene_replays": [
+    {
+      "dataset": "Farmland",
+      "seed": 42,
+      "all_pixel_prediction_differences": 0,
+      "test_confusion": {
+        "TP": 17585,
+        "FP": 828,
+        "TN": 42999,
+        "FN": 326
+      },
+      "normalized_inputs_identical": true,
+      "parameters": 213000,
+      "input_sha256": {
+        "date1": "710f105dd2ab02d6918fc5ae356fed03ca077f6b2e24bf32b6da8e66b80f7dbb",
+        "date2": "6c1cdc9f83c690a02e7c458b1b7eeb248108b718a7f52f2ae49a50490758d6e4",
+        "labels_uint8": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+      },
+      "checkpoint_sha256": "f2b6f729ed8a6caa5aa927084f2e0f44f172b5450a9fc7db2245cc97a268d1e6"
+    },
+    {
+      "dataset": "USA",
+      "seed": 42,
+      "all_pixel_prediction_differences": 0,
+      "test_confusion": {
+        "TP": 15293,
+        "FP": 572,
+        "TN": 55591,
+        "FN": 1049
+      },
+      "normalized_inputs_identical": true,
+      "parameters": 212808,
+      "input_sha256": {
+        "date1": "99757ac972cd6774bb8ba1f7ca78725c3614c92141b8d8e0f827ec9ec4f294f9",
+        "date2": "8997be784e6794375b57dcf12a3b20c660b696739c9c720cb511a3c8b5e036a9",
+        "labels_uint8": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+      },
+      "checkpoint_sha256": "6b7668ed3e854d7d951275f790e4dce3f1c8c619b98a8d1b2a04abd7eae482ee"
+    },
+    {
+      "dataset": "River",
+      "seed": 42,
+      "all_pixel_prediction_differences": 0,
+      "test_confusion": {
+        "TP": 7518,
+        "FP": 1065,
+        "TN": 98782,
+        "FN": 1986
+      },
+      "normalized_inputs_identical": true,
+      "parameters": 221256,
+      "input_sha256": {
+        "date1": "a3748ab1ebaecdad3596824f241f8cf4652119de39663879aed64850bbe4dee5",
+        "date2": "c2bb6514d88038920b56f89446b3ac6426c31c340d450a57587ec3813367a306",
+        "labels_uint8": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+      },
+      "checkpoint_sha256": "f568805dd7cfab9be5ad501c49fcd16ab795667070d53db6cda6f1ccc661f813"
+    }
+  ],
+  "unit_tests_passed": true,
+  "full_model_forward_backward_passed": true,
+  "train_and_evaluate_cli_passed": true,
+  "existing_checkpoint_overwrite_rejected": true,
+  "cli_smoke_note": "One actual Farmland epoch checks the CLI only; it is not included in the published 300-epoch results.",
+  "release_code_sha256": {
+    "raamnet/__init__.py": "fd4090ad6e345826613d8e50feb015ffcb8bdbab0dac5a93852ca33ec4d044e1",
+    "raamnet/data.py": "5d2ad8e9cc6da47414615351f7c60f0533515f83c09da257622ff62e7218f243",
+    "raamnet/engine.py": "2eaae22a1c6f3cbbb7e48d707b8f2599449cf6c82347884ae201c57b1f247064",
+    "raamnet/metrics.py": "97eb346c20ce5920224907c40047409c2295861adaa9e19a6771ff901f0d6775",
+    "raamnet/model.py": "565e31cd36c930780466fc62d7644a885d1c36989218f7bc5ce9291b461b5853",
+    "raamnet/_stage39_base.py": "f68aa229b047ea8048c9ba2ab52aefe82a63fe3b86a67ee241a339afb10285f6",
+    "raamnet/stage39.py": "d13c7857b32525e91f132d95ecb2b83c1628c9714cd77871416c170cd3fc168e",
+    "raamnet/checkpoints.py": "3123e9d486fa58253a1793878f56cbe413fa304e8e26f0966049702f3b732c35",
+    "configs/scene_example.json": "924d688670377f90d0ca3dfa4af1758664a722938f3f8e305c0053448f93dabe",
+    "configs/Farmland.json": "690edd28655a931d9cecf05e91a56e07694e41cb8114d3e03b94aa2c66d81588",
+    "configs/River.json": "dd7799a1c77f22105c8922f1cc92032b7fc8e9f1317276842ece9fea30833625",
+    "configs/USA.json": "016837f112a6a1b641557f4f73bb53b8fa06363473bd8e936f986ab7a6ef3c2d",
+    "tests/test_model.py": "361600334d9185de561421bee1c9fc55c975e2da8838350dff56998d3b1c794c",
+    "tests/test_data.py": "d4223cdff5842cb07a6fe1c6eebeb3f3f147bbbd64f31773b50faaae16d2eb78",
+    "tests/verify_stage39_reference.py": "8ab4927ae69b9180cbdfeada7542e6e760ec37c56d451d2f9655d3490c7bfac4",
+    "train.py": "add49695a4ad3e72ea4b27c2f060da5d28b077027ce4795fddfb4449ff61f0c9",
+    "evaluate.py": "353f09dcb9aca4ab16a38c3bc1f31c79d7ea912cdf28d91433a2985ee782c0b9",
+    "profile_complexity.py": "14f1451e04fbe7d1ead81f7d6921a89088e1c2bcbe86e5c90dae14d68af19015"
+  },
+  "tested_transport_proof_sha256": "9796cbb7dc8fc9791a53c606a7594cef8424e897ef38cb235d419e8161bf7058",
+  "git_LF_normalization": {
+    "only_transport_line_endings_changed": true,
+    "tested_CRLF_sha256": {
+      "configs/Farmland.json": "0ab408c03860eb701bbd5bc40481b518d676747989a9e7219627019c64cb77ea",
+      "configs/River.json": "1f626fec038c97d72277d69edeeff20a95f40c9375501d60f280cdc8d54139ed",
+      "configs/USA.json": "f40fae2c250ff8bb60a09c1ca3648d3a40b2bae298fdc297fb6a259458885441",
+      "raamnet/model.py": "2cfa17f0c18505c34f4f64cfeaeb4d7e8a13dc99277b72cee7d854334532556f"
+    },
+    "note": "Text files are published with Git LF endings. Each local file matched its actually tested transport SHA before this CRLF-to-LF-only conversion; Python ASTs were unchanged."
+  }
+}

@@ -1,5 +1,5 @@
 """RAAM-Net for bitemporal hyperspectral image change detection."""
 
-from .model import RAAMNet
+from .model import MODEL_VERSION, RAAMNet
 
-__all__ = ["RAAMNet"]
+__all__ = ["RAAMNet", "MODEL_VERSION"]

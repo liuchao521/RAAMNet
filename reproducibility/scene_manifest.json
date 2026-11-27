@@ -1,0 +1,32 @@
+{
+  "Farmland": {
+    "shape": [
+      450,
+      140,
+      155
+    ],
+    "first_sha256": "710f105dd2ab02d6918fc5ae356fed03ca077f6b2e24bf32b6da8e66b80f7dbb",
+    "second_sha256": "6c1cdc9f83c690a02e7c458b1b7eeb248108b718a7f52f2ae49a50490758d6e4",
+    "label_sha256": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+  },
+  "USA": {
+    "shape": [
+      307,
+      241,
+      154
+    ],
+    "first_sha256": "99757ac972cd6774bb8ba1f7ca78725c3614c92141b8d8e0f827ec9ec4f294f9",
+    "second_sha256": "8997be784e6794375b57dcf12a3b20c660b696739c9c720cb511a3c8b5e036a9",
+    "label_sha256": "5ceabc473c1dd0f737375888a14814e061054dae0d3185069b4ba335db9ef303"
+  },
+  "River": {
+    "shape": [
+      463,
+      241,
+      198
+    ],
+    "first_sha256": "a3748ab1ebaecdad3596824f241f8cf4652119de39663879aed64850bbe4dee5",
+    "second_sha256": "c2bb6514d88038920b56f89446b3ac6426c31c340d450a57587ec3813367a306",
+    "label_sha256": "bfe7f2eadd3c8a8bb3be5625422c7ffdf0822862d7589985f7c86f58ec859c37"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "date1_path": "../data/Farmland/farm06.mat",
+  "date1_key": "imgh",
+  "date2_path": "../data/Farmland/farm07.mat",
+  "date2_key": "imghl",
+  "label_path": "../data/Farmland/label.mat",
+  "label_key": "label",
+  "positive_values": [
+    1
+  ],
+  "dataset": "Farmland",
+  "cube_layout": "HWC",
+  "standardize": true,
+  "expected_array_sha256": {
+    "date1": "710f105dd2ab02d6918fc5ae356fed03ca077f6b2e24bf32b6da8e66b80f7dbb",
+    "date2": "6c1cdc9f83c690a02e7c458b1b7eeb248108b718a7f52f2ae49a50490758d6e4",
+    "labels_uint8": "9294d45f8a5508e470a26afcad0a3d79c0bc1b0499c819f541d82e9d34be1fbc"
+  }
+}
